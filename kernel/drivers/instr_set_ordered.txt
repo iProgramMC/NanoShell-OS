@@ -1,0 +1,57 @@
+description                |  code  | hex  | instr      | data       | register  | 4-bit | Finished in NanoShell Compiler | Finished in NS Interpreter
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+no-op                      |  nop   | 0x00 | 00000000   | 00000000   | 0000000   | 0     | X                              | X
+load x                     |  ldx   | 0x01 | 00000001   | RAM Addr   | Register  | 0     | X                              | X
+push x to stack            |  psx   | 0x02 | 00000010   | 00000000   | Register  | 0     | X                              | X
+pop x from stack           |  ppx   | 0x03 | 00000011   | 00000000   | Register  | 0     | X                              | X
+add const to X             |  adx   | 0x04 | 00000100   | Constant   | Register  | 0     | X                              | X
+mul with x                 |  mlx   | 0x06 | 00000110   | Constant   | Register  | 0     | X                              | X
+load immediate X           |  lix   | 0x08 | 00001000   | Constant   | Register  | 0     | X                              | X
+delay ms                   |  dlm   | 0x0a | 00001010   | Constant   | Constant  | 0     | X                              | X
+delay seconds              |  dls   | 0x0b | 00001011   | Constant   | Nothing   | 0     | X                              | X
+get time in ms             |  tmx   | 0x0d | 00001101   | Nothing    | Register  | 0     | X                              | X
+get sketch time            |  tsx   | 0x0e | 00001110   | Nothing    | Register  | 0     | X                              | X
+read pad state             |  rdx   | 0x0f | 00001111   | Nothing    | Register  | 0     | X                              | X
+store x to addr            |  stx   | 0x11 | 00010001   | RAM Addr   | Register  | 0     | X                              | X
+and X,Y->Z                 |  and   | 0x1a | 00011010   | 2 Registrs | Register  | 0     | X                              | X
+load pgmaddr X             |  lax   | 0x29 | 00101001   | 2 Registrs | Register  | 0     | X                              | X
+load addr RAM X            |  lrx   | 0x3b | 00111101   | Register   | Register  | 0     | X                              | X
+xor X,Y->Z                 |  xor   | 0x4a | 01001010   | 2 Registrs | Register  | 0     | X                              | X
+syscall                    |  sys   | 0x5c | 01011100   | SysCallType| Nothing   | 0     | X                              | X
+not X -> Y                 |  ntx   | 0x57 | 01010111   | Register   | Register  | 0     | X                              | X
+set mem page low           |  smpl  | 0x61 | 01100001   | Nothing    | Register  | 0     |                                | X
+set mem page high          |  smph  | 0x63 | 01100011   | Nothing    | Register  | 0     |                                | X
+or X, Y->Z                 |  orb   | 0x6a | 01101010   | 2 Registrs | Register  | 0     | X                              | X
+clear registers            |  clr   | 0x75 | 01110101   | 00101011   | 1010011   | 0     | X                              | X
+add x+y=y                  |  add   | 0x84 | 10000100   | RegisterX  | RegisterY | 0     | X                              | X
+mul x*y=y                  |  mul   | 0x86 | 10000110   | Register   | Register  | 0     | X                              | X
+div x/y=x                  |  div   | 0x87 | 10000111   | Register   | Register  | 0     |                                | 
+move reg-to-reg            |  mov   | 0x94 | 10010100   | 2 Registrs | Nothing   | 0     | X                              | X
+arithmetic shft left       |  asl   | 0x95 | 10010101   | Nothing    | Register  | 0     | X                              | X
+arithmetic shft right      |  asr   | 0x97 | 10010111   | Nothing    | Register  | 0     | X                              | X
+serial print X             |  spx   | 0xaa | 10101010   | Nothing    | Register  | 0     | X                              | X
+serial prnt chr            |  spt   | 0xab | 10101011   | Constant   | Nothing   | 0     | X                              | X
+serial read X              |  srx   | 0xac | Nothing    | Nothing    | Register  | 0     |                                | 
+set video mode             |  svm   | 0xb5 | 10110101   | Constant   | Nothing   | 0     | X                              | X
+exit immediately           |  exit  | 0xbf | 10111111   | 01010000   | 0011001   | 0     | X                              | X
+get curr program page      |  gcp   | 0xcc | 11001100   | Nothing    | Register  | 0     |                                | X
+push frame (mode 0x02 only)|  pfr   | 0xd0 | 11010000   | Nothing    | Nothing   | 0     |                                | 
+branch if x != y           |  bxn   | 0xd1 | Nothing    | Register   | Register  | 0     |                                | 
+branch if x == y           |  bxe   | 0xd2 | Nothing    | Register   | Register  | 0     |                                | 
+branch if x != 0           |  bxnz  | 0xd3 | Nothing    | Register   | Register  | 0     |                                | 
+branch if x == 0           |  bxz   | 0xd4 | Nothing    | Register   | Register  | 0     |                                | 
+branch if x < y            |  bxl   | 0xd5 | Nothing    | Register   | Register  | 0     |                                | 
+branch if x > y            |  bxg   | 0xd6 | Nothing    | Register   | Register  | 0     |                                | 
+branch if x <= y           |  bxle  | 0xd7 | Nothing    | Register   | Register  | 0     |                                | 
+branch if x >= y           |  bxge  | 0xd8 | Nothing    | Register   | Register  | 0     |                                | 
+write disp pixel           |  wdp   | 0xe7 | 11100111   | 2 Registrs | Register  | 0     | X                              | X
+return from call           |  ret   | 0xf5 | 11110101   | 01010101   | Nothing   | 0     | X                              | X
+initialize pgm             |  int   | 0xff | 11111111   | 11111111   | 1111111   | 1     | X                              | X
+jump if x != y             |  jxn   | 0x2- | 0010XXXX   | XXXXXXXX   | 2-regs    | 1     | X                              | X
+jump if x == y             |  jxe   | 0x3- | 0011XXXX   | XXXXXXXX   | 2-regs    | 1     | X                              | X
+jump if x != 0             |  jxnz  | 0x6- | 0110XXXX   | XXXXXXXX   | register  | 1     | X                              | X
+jump if x == 0             |  jxz   | 0x7- | 0111XXXX   | XXXXXXXX   | register  | 1     | X                              | X
+uncond. jump               |  jmp   | 0x8- | 1000XXXX   | XXXXXXXX   | Nothing   | 1     | X                              | X
+set memory page in         |  smp   | 0xb- | 1011XXXX   | XXXXXXXX   | Nothing   | 1     |                                | X
+set program page           |  spp   | 0xc- | 1100XXXX   | XXXXXXXX   | Nothing   | 1     |                                | X
+uncond. call               |  call  | 0xf- | 1111XXXX   | XXXXXXXX   | Nothing   | 1     | X                              | X
